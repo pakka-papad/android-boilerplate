@@ -5,7 +5,7 @@ object Versions {
     const val lifecycleRuntime = "2.7.0"
     const val activityCompose = "1.8.2"
 
-    const val splashScreen = "1.0.0-beta02"
+    const val splashScreen = "1.0.1"
 
     const val composeCompiler = "1.5.1"
     const val composeBom = "2023.08.00"
