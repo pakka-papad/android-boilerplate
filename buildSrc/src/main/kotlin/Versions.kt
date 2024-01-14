@@ -5,10 +5,14 @@ object Versions {
     const val lifecycleRuntime = "2.7.0"
     const val activityCompose = "1.8.2"
 
+    const val appCompat = "1.6.1"
+
     const val splashScreen = "1.0.1"
 
     const val composeCompiler = "1.5.1"
     const val composeBom = "2023.08.00"
+
+    const val navigation = "2.7.6"
 
     const val leakcanary = "2.9.1"
 

@@ -1,6 +1,7 @@
 buildscript {
     dependencies {
         classpath(Plugins.hilt)
+        classpath(Plugins.navSafeArgs)
     }
 }
 

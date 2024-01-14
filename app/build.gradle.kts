@@ -58,6 +58,8 @@ dependencies {
     implementation(Libraries.lifecycleRuntime)
     implementation(Libraries.activityCompose)
 
+    implementation(Libraries.appCompat)
+
     implementation(Libraries.splashScreen)
 
     implementation(platform(Libraries.composeBom))
@@ -67,6 +69,9 @@ dependencies {
     implementation(Libraries.material3)
     debugImplementation(Libraries.composeUiTooling)
     debugImplementation(Libraries.composeUiTestManifest)
+
+    implementation(Libraries.navigationUi)
+    implementation(Libraries.navigationFragment)
 
     debugImplementation(Libraries.leakcanary)
 

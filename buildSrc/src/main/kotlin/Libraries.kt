@@ -3,6 +3,8 @@ object Libraries {
     const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycleRuntime}"
     const val activityCompose = "androidx.activity:activity-compose:${Versions.activityCompose}"
 
+    const val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
+
     const val splashScreen = "androidx.core:core-splashscreen:${Versions.splashScreen}"
 
     const val composeBom = "androidx.compose:compose-bom:${Versions.composeBom}"
@@ -12,6 +14,9 @@ object Libraries {
     const val composeUiTestManifest = "androidx.compose.ui:ui-test-manifest"
     const val composeUiToolingPreview = "androidx.compose.ui:ui-tooling-preview"
     const val material3 = "androidx.compose.material3:material3"
+
+    const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
+    const val navigationUi = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
 
     const val leakcanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakcanary}"
 
