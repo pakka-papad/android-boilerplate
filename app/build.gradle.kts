@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -10,12 +12,29 @@ android {
     namespace = "com.example.sample"
     compileSdk = Sdk.compile
 
+    signingConfigs {
+        create("release") {
+            storeFile = gradleLocalProperties(rootDir)["RELEASE_STORE_FILE"]?.let { file(it) }
+            storePassword = gradleLocalProperties(rootDir)["RELEASE_STORE_PASSWORD"] as String
+            keyAlias = gradleLocalProperties(rootDir)["RELEASE_KEY_ALIAS"] as String
+            keyPassword = gradleLocalProperties(rootDir)["RELEASE_KEY_PASSWORD"] as String
+        }
+        create("staging"){
+            storeFile = gradleLocalProperties(rootDir)["STAGING_STORE_FILE"]?.let { file(it) }
+            storePassword = gradleLocalProperties(rootDir)["STAGING_STORE_PASSWORD"] as String
+            keyAlias = gradleLocalProperties(rootDir)["STAGING_KEY_ALIAS"] as String
+            keyPassword = gradleLocalProperties(rootDir)["STAGING_KEY_PASSWORD"] as String
+        }
+    }
+
     defaultConfig {
         applicationId = "com.example.sample"
         minSdk = Sdk.min
         targetSdk = Sdk.target
         versionCode = AppVersion.code
         versionName = AppVersion.str
+
+        resValue("integer", "app_version_code", AppVersion.code.toString())
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -24,12 +43,32 @@ android {
     }
 
     buildTypes {
+        debug {
+            versionNameSuffix = "-debug"
+            applicationIdSuffix = ".debug"
+            resValue("string","app_version_name", AppVersion.str + versionNameSuffix)
+        }
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.findByName("release")
+            resValue("string","app_version_name", AppVersion.str)
+        }
+        create("staging") {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            versionNameSuffix = "-staging"
+            applicationIdSuffix = ".staging"
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            signingConfig = signingConfigs.findByName("staging")
+            resValue("string","app_version_name", AppVersion.str + versionNameSuffix)
         }
     }
     compileOptions {

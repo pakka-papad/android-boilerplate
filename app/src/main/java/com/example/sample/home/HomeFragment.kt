@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -14,9 +16,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.example.sample.R
 import com.example.sample.ui.theme.SampleTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -43,10 +47,18 @@ class HomeFragment: Fragment() {
                                     .padding(paddingValues),
                                 contentAlignment = Alignment.Center
                             ){
-                                Text(
-                                    text = "Hello! Sample App",
-                                    style = MaterialTheme.typography.titleLarge,
-                                )
+                                Column(
+                                    verticalArrangement = Arrangement.spacedBy(10.dp),
+                                    horizontalAlignment = Alignment.CenterHorizontally
+                                ) {
+                                    Text(
+                                        text = "Hello! Sample App",
+                                        style = MaterialTheme.typography.titleLarge,
+                                    )
+                                    Text(
+                                        text = "App Version: ${context.getString(R.string.app_version_name)}",
+                                    )
+                                }
                             }
                         }
                     )
