@@ -52,7 +52,7 @@ class HomeFragment: Fragment() {
                                     horizontalAlignment = Alignment.CenterHorizontally
                                 ) {
                                     Text(
-                                        text = "Hello! Sample App",
+                                        text = context.getString(R.string.hello_sample_app),
                                         style = MaterialTheme.typography.titleLarge,
                                     )
                                     Text(
