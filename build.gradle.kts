@@ -1,11 +1,11 @@
 buildscript {
     dependencies {
-        classpath(Plugins.hilt)
-        classpath(Plugins.navSafeArgs)
+        classpath(libs.hilt.android.gradle.plugin)
+        classpath(libs.navigation.safe.args.gradle.plugin)
     }
 }
 
 plugins {
-    id("com.android.application") version "8.2.1" apply false
-    id("org.jetbrains.kotlin.android") version Versions.kotlin apply false
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.kotlin.android) apply false
 }

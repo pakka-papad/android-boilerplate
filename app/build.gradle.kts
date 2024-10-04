@@ -10,7 +10,7 @@ plugins {
 
 android {
     namespace = "com.example.sample"
-    compileSdk = Sdk.compile
+    compileSdk = libs.versions.sdk.compile.get().toInt()
 
     signingConfigs {
         create("release") {
@@ -29,10 +29,14 @@ android {
 
     defaultConfig {
         applicationId = "com.example.sample"
-        minSdk = Sdk.min
-        targetSdk = Sdk.target
-        versionCode = AppVersion.code
-        versionName = AppVersion.str
+        minSdk = libs.versions.sdk.min.get().toInt()
+        targetSdk = libs.versions.sdk.target.get().toInt()
+        val major = libs.versions.app.major.get().toInt()
+        val minor = libs.versions.app.minor.get().toInt()
+        val patch = libs.versions.app.patch.get().toInt()
+        val verCode = 10000 * major + 100 * minor + patch
+        versionCode = verCode
+        versionName = "$major.$minor.$patch"
 
         resValue("integer", "app_version_code", AppVersion.code.toString())
 
@@ -83,7 +87,7 @@ android {
         viewBinding = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.composeCompiler
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
     packaging {
         resources {
@@ -93,33 +97,33 @@ android {
 }
 
 dependencies {
-    implementation(Libraries.androidxCore)
-    implementation(Libraries.lifecycleRuntime)
-    implementation(Libraries.activityCompose)
+    implementation(libs.androidx.core)
+    implementation(libs.lifecycle.runtime)
+    implementation(libs.activity.compose)
 
-    implementation(Libraries.appCompat)
+    implementation(libs.app.compat)
 
-    implementation(Libraries.splashScreen)
+    implementation(libs.splash.screen)
 
-    implementation(platform(Libraries.composeBom))
-    implementation(Libraries.composeUi)
-    implementation(Libraries.composeUiGraphics)
-    implementation(Libraries.composeUiToolingPreview)
-    implementation(Libraries.material3)
-    debugImplementation(Libraries.composeUiTooling)
-    debugImplementation(Libraries.composeUiTestManifest)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.graphics)
+    implementation(libs.compose.ui.tooling.perview)
+    implementation(libs.material3)
+    debugImplementation(libs.compose.ui.tooling)
+    debugImplementation(libs.compose.ui.test.manifest)
 
-    implementation(Libraries.navigationUi)
-    implementation(Libraries.navigationFragment)
+    implementation(libs.navigation.ui)
+    implementation(libs.navigation.fragment)
 
-    debugImplementation(Libraries.leakcanary)
+    debugImplementation(libs.leakcanary)
 
-    implementation(Libraries.coilCompose)
+    implementation(libs.coil.compose)
 
-    implementation(Libraries.hilt)
-    kapt(AnnotationProcessor.hiltCompiler)
+    implementation(libs.hilt)
+    kapt(libs.hilt.compiler)
 
-    implementation(Libraries.timber)
+    implementation(libs.timber)
 
-    testImplementation(Libraries.junit)
+    testImplementation(libs.junit)
 }
