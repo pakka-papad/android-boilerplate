@@ -48,7 +48,7 @@ jobs:
         run: ./gradlew assembleStaging
 
       - name: Rename apk
-        run: mv ./app/build/outputs/apk/staging/app-staging.apk ./app/build/outputs/apk/internalRelease/sample-app-staging-build-${{ github.run_number }}.apk
+        run: mv ./app/build/outputs/apk/staging/app-staging.apk ./app/build/outputs/apk/staging/sample-app-staging-build-${{ github.run_number }}.apk
 
       - name: Upload apk
         uses: actions/upload-artifact@v4
