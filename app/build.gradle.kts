@@ -12,6 +12,12 @@ android {
     namespace = "com.example.sample"
     compileSdk = libs.versions.sdk.compile.get().toInt()
 
+    val major = libs.versions.app.major.get().toInt()
+    val minor = libs.versions.app.minor.get().toInt()
+    val patch = libs.versions.app.patch.get().toInt()
+    val verCode = 10000 * major + 100 * minor + patch
+    val verName = "$major.$minor.$patch"
+
     signingConfigs {
         create("release") {
             storeFile = gradleLocalProperties(rootDir)["RELEASE_STORE_FILE"]?.let { file(it) }
@@ -31,14 +37,10 @@ android {
         applicationId = "com.example.sample"
         minSdk = libs.versions.sdk.min.get().toInt()
         targetSdk = libs.versions.sdk.target.get().toInt()
-        val major = libs.versions.app.major.get().toInt()
-        val minor = libs.versions.app.minor.get().toInt()
-        val patch = libs.versions.app.patch.get().toInt()
-        val verCode = 10000 * major + 100 * minor + patch
         versionCode = verCode
-        versionName = "$major.$minor.$patch"
+        versionName = verName
 
-        resValue("integer", "app_version_code", AppVersion.code.toString())
+        resValue("integer", "app_version_code", versionCode?.toString()!!)
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -50,7 +52,7 @@ android {
         debug {
             versionNameSuffix = "-debug"
             applicationIdSuffix = ".debug"
-            resValue("string","app_version_name", AppVersion.str + versionNameSuffix)
+            resValue("string","app_version_name", verName + versionNameSuffix)
         }
         release {
             isMinifyEnabled = true
@@ -60,7 +62,7 @@ android {
                 "proguard-rules.pro"
             )
             signingConfig = signingConfigs.findByName("release")
-            resValue("string","app_version_name", AppVersion.str)
+            resValue("string","app_version_name", verName)
         }
         create("staging") {
             isMinifyEnabled = true
@@ -72,7 +74,7 @@ android {
                 "proguard-rules.pro"
             )
             signingConfig = signingConfigs.findByName("staging")
-            resValue("string","app_version_name", AppVersion.str + versionNameSuffix)
+            resValue("string","app_version_name", verName + versionNameSuffix)
         }
     }
     compileOptions {

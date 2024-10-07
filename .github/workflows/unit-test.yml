@@ -1,0 +1,47 @@
+name: unit-test
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+
+jobs:
+  test:
+    name: Perform Unit Testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4
+
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 17
+          cache: 'gradle'
+
+      - name: Setup Local properties
+        env:
+          STORE_FILE: ${{ secrets.RELEASE_STORE_FILE }}
+          IR_STORE_FILE: ${{ secrets.STAGING_STORE_FILE }}
+        run: mkdir keys &&
+          echo $RELEASE_STORE_FILE | base64 -di > keys/release_store_key.jks &&
+          echo $STAGING_STORE_FILE | base64 -di > keys/staging_store_key.jks &&
+          echo $'RELEASE_STORE_FILE=${{ github.workspace }}/keys/release_store_key.jks\n
+          RELEASE_STORE_PASSWORD=${{ secrets.RELEASE_STORE_PASSWORD }}\n
+          RELEASE_KEY_ALIAS=${{ secrets.RELEASE_KEY_ALIAS }}\n
+          RELEASE_KEY_PASSWORD=${{ secrets.RELEASE_KEY_PASSWORD }}\n
+          STAGING_STORE_FILE=${{ github.workspace }}/keys/staging_store_key.jks\n
+          STAGING_STORE_PASSWORD=${{ secrets.STAGING_STORE_PASSWORD }}\n
+          STAGING_KEY_ALIAS=${{ secrets.STAGING_KEY_ALIAS }}\n
+          STAGING_KEY_PASSWORD=${{ secrets.STAGING_KEY_PASSWORD }}\n' > ./local.properties
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Run unit tests
+        run: ./gradlew testDebug
