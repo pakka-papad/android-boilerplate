@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: Build IR apk
+    name: Build staging apk
     runs-on: ubuntu-latest
 
     steps:
