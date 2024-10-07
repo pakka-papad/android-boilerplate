@@ -24,8 +24,8 @@ jobs:
 
       - name: Setup Local properties
         env:
-          STORE_FILE: ${{ secrets.RELEASE_STORE_FILE }}
-          IR_STORE_FILE: ${{ secrets.STAGING_STORE_FILE }}
+          RELEASE_STORE_FILE: ${{ secrets.RELEASE_STORE_FILE }}
+          STAGING_STORE_FILE: ${{ secrets.STAGING_STORE_FILE }}
         run: mkdir keys &&
           echo $RELEASE_STORE_FILE | base64 -di > keys/release_store_key.jks &&
           echo $STAGING_STORE_FILE | base64 -di > keys/staging_store_key.jks &&
