@@ -15,7 +15,7 @@ androidx-core = "1.12.0"
 lifecycle-runtime = "2.7.0"
 activity-compose = "1.8.2"
 
-app-compat = "1.6.1"
+app-compat = "1.7.0"
 
 splash-screen = "1.0.1"
 
