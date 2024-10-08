@@ -118,7 +118,7 @@ dependencies {
     implementation(libs.navigation.ui)
     implementation(libs.navigation.fragment)
 
-    debugImplementation(libs.leakcanary)
+    //debugImplementation(libs.leakcanary)
 
     implementation(libs.coil.compose)
 

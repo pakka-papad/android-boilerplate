@@ -8,7 +8,7 @@ sdk-min = "21"
 sdk-compile = "34"
 sdk-target = "34"
 
-kotlin = "1.9.0"
+kotlin = "1.9.24"
 android-gradle-plugin = "8.2.1"
 
 androidx-core = "1.12.0"
@@ -19,7 +19,7 @@ app-compat = "1.6.1"
 
 splash-screen = "1.0.1"
 
-compose-compiler = "1.5.1"
+compose-compiler = "1.5.14"
 compose-bom = "2023.08.00"
 
 navigation = "2.7.6"
@@ -70,5 +70,6 @@ junit = { group = "junit", name = "junit", version.ref = "junit" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+
 
 
