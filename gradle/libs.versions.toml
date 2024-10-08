@@ -20,7 +20,7 @@ app-compat = "1.6.1"
 splash-screen = "1.0.1"
 
 compose-compiler = "1.5.14"
-compose-bom = "2023.08.00"
+compose-bom = "2024.09.03"
 
 navigation = "2.7.6"
 
