@@ -8,7 +8,7 @@ sdk-min = "21"
 sdk-compile = "34"
 sdk-target = "34"
 
-kotlin = "1.9.24"
+kotlin = "2.0.20"
 android-gradle-plugin = "8.2.1"
 
 androidx-core = "1.12.0"
