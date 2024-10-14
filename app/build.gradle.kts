@@ -5,7 +5,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
-    id("dev.shreyaspatil.compose-compiler-report-generator") version "1.2.0"
+    id("dev.shreyaspatil.compose-compiler-report-generator") version "1.4.0"
 }
 
 android {
