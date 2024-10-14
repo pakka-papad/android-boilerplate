@@ -28,7 +28,7 @@ leakcanary = "2.9.1"
 
 coil-compose = "2.2.2"
 
-hilt = "2.38.1"
+hilt = "2.52"
 
 timber = "5.0.1"
 
