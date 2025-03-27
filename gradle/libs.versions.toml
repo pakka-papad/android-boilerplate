@@ -24,7 +24,7 @@ splash-screen = "1.0.1"
 
 compose-bom = "2024.09.03"
 
-navigation = "2.7.6"
+navigation = "2.8.5"
 
 leakcanary = "2.9.1"
 
