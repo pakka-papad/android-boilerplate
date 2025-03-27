@@ -8,8 +8,11 @@ sdk-min = "21"
 sdk-compile = "34"
 sdk-target = "34"
 
-kotlin = "1.9.24"
-android-gradle-plugin = "8.2.1"
+kotlin = "2.1.10"
+android-gradle-plugin = "8.8.0"
+ksp = "2.1.10-1.0.30"
+
+compose-compiler-report-generator = "1.2.0"
 
 androidx-core = "1.12.0"
 lifecycle-runtime = "2.7.0"
@@ -19,7 +22,6 @@ app-compat = "1.6.1"
 
 splash-screen = "1.0.1"
 
-compose-compiler = "1.5.14"
 compose-bom = "2024.09.03"
 
 navigation = "2.7.6"
@@ -28,7 +30,7 @@ leakcanary = "2.9.1"
 
 coil-compose = "2.2.2"
 
-hilt = "2.38.1"
+hilt = "2.54"
 
 timber = "5.0.1"
 
@@ -70,6 +72,9 @@ junit = { group = "junit", name = "junit", version.ref = "junit" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+compose-compiler-report-generator = { id = "dev.shreyaspatil.compose-compiler-report-generator", version.ref = "compose-compiler-report-generator" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 
 
 

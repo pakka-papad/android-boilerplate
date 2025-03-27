@@ -1,11 +1,13 @@
-import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import java.io.FileInputStream
+import java.util.Properties
 
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    kotlin("kapt")
+    id("com.google.devtools.ksp")
     id("dagger.hilt.android.plugin")
-    id("dev.shreyaspatil.compose-compiler-report-generator") version "1.2.0"
+    alias(libs.plugins.compose.compiler.report.generator)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -18,18 +20,21 @@ android {
     val verCode = 10000 * major + 100 * minor + patch
     val verName = "$major.$minor.$patch"
 
+    val properties = Properties()
+    properties.load(FileInputStream(File(rootProject.rootDir, "local.properties")))
+
     signingConfigs {
         create("release") {
-            storeFile = gradleLocalProperties(rootDir)["RELEASE_STORE_FILE"]?.let { file(it) }
-            storePassword = gradleLocalProperties(rootDir)["RELEASE_STORE_PASSWORD"] as String
-            keyAlias = gradleLocalProperties(rootDir)["RELEASE_KEY_ALIAS"] as String
-            keyPassword = gradleLocalProperties(rootDir)["RELEASE_KEY_PASSWORD"] as String
+            storeFile = properties["RELEASE_STORE_FILE"]?.let { file(it) }
+            storePassword = properties["RELEASE_STORE_PASSWORD"] as String
+            keyAlias = properties["RELEASE_KEY_ALIAS"] as String
+            keyPassword = properties["RELEASE_KEY_PASSWORD"] as String
         }
         create("staging"){
-            storeFile = gradleLocalProperties(rootDir)["STAGING_STORE_FILE"]?.let { file(it) }
-            storePassword = gradleLocalProperties(rootDir)["STAGING_STORE_PASSWORD"] as String
-            keyAlias = gradleLocalProperties(rootDir)["STAGING_KEY_ALIAS"] as String
-            keyPassword = gradleLocalProperties(rootDir)["STAGING_KEY_PASSWORD"] as String
+            storeFile = properties["STAGING_STORE_FILE"]?.let { file(it) }
+            storePassword = properties["STAGING_STORE_PASSWORD"] as String
+            keyAlias = properties["STAGING_KEY_ALIAS"] as String
+            keyPassword = properties["STAGING_KEY_PASSWORD"] as String
         }
     }
 
@@ -88,9 +93,6 @@ android {
         compose = true
         viewBinding = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
-    }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -123,7 +125,7 @@ dependencies {
     implementation(libs.coil.compose)
 
     implementation(libs.hilt)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 
     implementation(libs.timber)
 
